@@ -1,0 +1,17 @@
+﻿apiVersion: v1
+kind: Service
+metadata:
+  name: Boilerplate-api-svc
+  namespace: as-solv
+spec:
+  #type: NodePort # should be ClusterIP for production or otherwise
+  type: ClusterIP
+  ports:
+  - name: "Boilerplate-port"
+    port: 80
+    targetPort: 8080
+   # nodePort: 30202 #to be used with type NodePort, range [30000,32000]
+  selector:
+    app: as-Boilerplate-api 
+status:
+  loadBalancer: {}

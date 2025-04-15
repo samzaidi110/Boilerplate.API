@@ -1,0 +1,46 @@
+﻿apiVersion: apps/v1 
+kind: Deployment
+metadata:
+  name: as-Boilerplate-api
+  namespace: as-solv
+  labels:
+    description: api-for-doc-engine
+    app: as-Boilerplate-api 
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      description: api-for-Boilerplate-api
+      app: as-Boilerplate-api 
+  template:
+    metadata:
+      labels:
+        description:  api-for-Boilerplate-api
+        app: as-Boilerplate-api 
+    spec:
+      containers:
+        - name: as-Boilerplate-api-cont
+          image: 10.60.60.34:8082/as.Boilerplate.api:#{image-tag}#
+          imagePullPolicy: Always
+          volumeMounts:
+                - name: config-volume
+                  mountPath: /app/appsettings.json
+                  subPath: appsettings.json
+          resources: {}
+          env:
+            - name: RELEASED_AT
+              value: $buildPipeline.startTime
+          ports: 
+            - containerPort: 80         
+      restartPolicy: Always
+      volumes:
+           - name: config-volume
+             configMap:
+               name: app-settings-Boilerplate-api
+               items:
+                 - key: app-settings
+                   path: appsettings.json
+
+      
