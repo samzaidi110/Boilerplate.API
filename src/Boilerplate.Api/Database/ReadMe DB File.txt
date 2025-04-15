@@ -121,3 +121,8 @@ CREATE TABLE public."BookGenres" (
 
 ALTER TABLE public."BookGenres" ADD CONSTRAINT "FK_BookGenre_Book" FOREIGN KEY ("BookId") REFERENCES public."Books"("Id") ON DELETE CASCADE;
 ALTER TABLE public."BookGenres" ADD CONSTRAINT "FK_BookGenre_Genre" FOREIGN KEY ("GenreId") REFERENCES public."Genres"("Id") ON DELETE CASCADE;
+
+
+
+--also update  connection sring in your app setings   for e.g my is 
+--"DefaultConnection": "Host=localhost;Port=5432;Database=LibraryManagementDB;Username=postgres;Password=postgres"
